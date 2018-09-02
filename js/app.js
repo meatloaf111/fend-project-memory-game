@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-var cards=["fa-diamond","fa-diamond","fa-paper-plane-o","paper-plane-o",
+var cards=["fa-diamond","fa-diamond","fa-paper-plane-o","fa-paper-plane-o",
 "fa-anchor","fa-anchor","fa-bolt","fa-bolt","fa-cube","fa-cube","fa-leaf","fa-leaf",
 "fa-bicycle","fa-bicycle","fa-bomb","fa-bomb"];
 
@@ -48,8 +48,11 @@ generateCards(cards);
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 function displaySymbol(evt){
-    if(evt.target.nodeName === 'LI'){
-        console.log(evt.target.nodeName + evt.target.innerHTML);
+    /*console.log(evt.target.localName);*/
+    if(evt.target.localName === 'li'){
+        /*console.log('clicked');*/
+        evt.target.classList.add('open');
+        evt.target.classList.add('show');
     }
 }
 
