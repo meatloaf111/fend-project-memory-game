@@ -6,6 +6,7 @@ var cards=["fa-diamond","fa-diamond","fa-paper-plane-o","fa-paper-plane-o",
 "fa-bicycle","fa-bicycle","fa-bomb","fa-bomb"];
 
 var openedcards=[];
+var targetLists=[];
 
 /*
  * Display the cards on the page
@@ -49,17 +50,41 @@ generateCards(cards);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-function matchedCheck(card){
+function lockcards(){
+
+}
+
+function hidecards(evt){
+    openedcards.pop();
+    openedcards.pop();
+    /*
+    targetLists[0].classList.remove("open");
+    targetLists[0].classList.remove("show");
+    targetLists[1].classList.remove("open");
+    targetLists[1].classList.remove("show");
+    */
+
+   evt.target.classList.remove('open');
+   evt.target.classList.remove('show');
+
+}
+
+
+function matchedCheck(evt){
+    /*targetLists.push(evt.target);*/
+    cardValue = evt.target.childNodes[1].className;
+    console.log(cardValue);
     if(openedcards.length < 2){
-        openedcards.push(card);
+        openedcards.push(cardValue);
     }
     if(openedcards.length === 2){
         console.log("card1:" +openedcards[0]);
-        console.log("card2:" +openedcards[0]);
+        console.log("card2:" +openedcards[1]);
         if(openedcards[0] === openedcards[1]){
             console.log("card matched!");
         }else{
             console.log("card not matched!");
+            hidecards(evt);
         }
     }
 }
@@ -71,9 +96,9 @@ function displaySymbol(evt){
         evt.target.classList.add('open');
         evt.target.classList.add('show');
         /*cardValue = document.querySelector('.card.open i').className;*/
-        cardValue = evt.target.childNodes[1].className;
-        console.log(cardValue);
-        matchedCheck(cardValue);
+        evt.target.removeEventListener('click', displaySymbol);
+        /*document.querySelector('.deck').removeEventListener('click', displaySymbol);*/
+        matchedCheck(evt);
     }
 }
 
