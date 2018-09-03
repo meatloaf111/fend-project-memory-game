@@ -70,7 +70,8 @@ function displaySymbol(evt){
         /*console.log('clicked');*/
         evt.target.classList.add('open');
         evt.target.classList.add('show');
-        cardValue = document.querySelector('.card.open i').className;
+        /*cardValue = document.querySelector('.card.open i').className;*/
+        cardValue = evt.target.childNodes[1].className;
         console.log(cardValue);
         matchedCheck(cardValue);
     }
