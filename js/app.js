@@ -5,6 +5,8 @@ var cards=["fa-diamond","fa-diamond","fa-paper-plane-o","fa-paper-plane-o",
 "fa-anchor","fa-anchor","fa-bolt","fa-bolt","fa-cube","fa-cube","fa-leaf","fa-leaf",
 "fa-bicycle","fa-bicycle","fa-bomb","fa-bomb"];
 
+var openedcards=[];
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -47,12 +49,30 @@ generateCards(cards);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+function matchedCheck(card){
+    if(openedcards.length < 2){
+        openedcards.push(card);
+    }
+    if(openedcards.length === 2){
+        console.log("card1:" +openedcards[0]);
+        console.log("card2:" +openedcards[0]);
+        if(openedcards[0] === openedcards[1]){
+            console.log("card matched!");
+        }else{
+            console.log("card not matched!");
+        }
+    }
+}
+
 function displaySymbol(evt){
     /*console.log(evt.target.localName);*/
     if(evt.target.localName === 'li'){
         /*console.log('clicked');*/
         evt.target.classList.add('open');
         evt.target.classList.add('show');
+        cardValue = document.querySelector('.card.open i').className;
+        console.log(cardValue);
+        matchedCheck(cardValue);
     }
 }
 
