@@ -9,6 +9,7 @@ var openedcards = [];
 var targetLists = [];
 var moveCounter = document.querySelector('.moves');
 var moves = 0;
+var num_cards = 0;
 
 /*
  * Display the cards on the page
@@ -37,6 +38,7 @@ function generateCards(cardList) {
 
     moveCounter.innerText = moves;
     let shuffledCards = shuffle(cardList);
+    num_cards = shuffledCards.length;
     for (i = 0; i < shuffledCards.length; i++) {
         var cardValue = document.querySelectorAll('.deck .fa');
         cardValue[i].classList.add(shuffledCards[i]);
@@ -61,7 +63,34 @@ function lockcards(evt) {
     openedcards[1].classList.add('match');
 
     openedcards = [];
+    num_cards -= 2;
+    if (num_cards == 0) {
+        gameOver();
+    }
 }
+
+function gameOver() {
+    console.log('game is over');
+    document.getElementById('overlay').style.display = "block";
+}
+
+
+button = document.querySelector('button');
+button.addEventListener('click', restart);
+
+function restart() {
+    console.log('game restart');
+    document.getElementById('overlay').style.display = "none";
+    setTimeout(function () {
+        existing_cards = document.querySelectorAll('.deck li');
+        existing_cards.forEach(function (card) {
+            card.classList.remove('open', 'show', 'match');
+        });
+        moves = 0;
+        generateCards(cards);
+    }, 1000);
+}
+
 
 function hidecards(evt) {
     setTimeout(function () {
@@ -75,9 +104,10 @@ function hidecards(evt) {
 
 function matchedCheck(evt) {
 
-
+    /*
     console.log("card1:" + openedcards[0].childNodes[1].className);
     console.log("card2:" + openedcards[1].childNodes[1].className);
+    */
 
     if (openedcards[0].childNodes[1].className === openedcards[1].childNodes[1].className) {
         console.log("card matched!");
