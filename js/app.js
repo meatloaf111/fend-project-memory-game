@@ -7,9 +7,8 @@ var cards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o",
 
 var openedcards = [];
 var targetLists = [];
-var time = 0;
-var timer;
-var initialClick = false;
+var moveCounter = document.querySelector('.moves');
+var moves = 0;
 
 /*
  * Display the cards on the page
@@ -34,6 +33,9 @@ function shuffle(array) {
 }
 
 function generateCards(cardList) {
+
+
+    moveCounter.innerText = moves;
     let shuffledCards = shuffle(cardList);
     for (i = 0; i < shuffledCards.length; i++) {
         var cardValue = document.querySelectorAll('.deck .fa');
@@ -43,16 +45,6 @@ function generateCards(cardList) {
 
 generateCards(cards);
 
-/*
-var timer = setInterval(function(){
-    time++;
-    console.log(time);
-},1000);
-
-function clearTimer(){
-    clearInterval(timer);
-}
-*/
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -83,6 +75,7 @@ function hidecards(evt) {
 
 function matchedCheck(evt) {
 
+
     console.log("card1:" + openedcards[0].childNodes[1].className);
     console.log("card2:" + openedcards[1].childNodes[1].className);
 
@@ -95,6 +88,8 @@ function matchedCheck(evt) {
             hidecards(evt);
         });
     }
+    moves += 1;
+    moveCounter.innerText = moves;
 }
 
 
