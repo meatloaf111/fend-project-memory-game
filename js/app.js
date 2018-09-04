@@ -1,12 +1,15 @@
 /*
  * Create a list that holds all of your cards
  */
-var cards=["fa-diamond","fa-diamond","fa-paper-plane-o","fa-paper-plane-o",
-"fa-anchor","fa-anchor","fa-bolt","fa-bolt","fa-cube","fa-cube","fa-leaf","fa-leaf",
-"fa-bicycle","fa-bicycle","fa-bomb","fa-bomb"];
+var cards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o",
+    "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf",
+    "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
 
-var openedcards=[];
-var targetLists=[];
+var openedcards = [];
+var targetLists = [];
+var time = 0;
+var timer;
+var initialClick = false;
 
 /*
  * Display the cards on the page
@@ -30,15 +33,26 @@ function shuffle(array) {
     return array;
 }
 
-function generateCards (cardList) {
+function generateCards(cardList) {
     let shuffledCards = shuffle(cardList);
     for (i = 0; i < shuffledCards.length; i++) {
-      var cardValue = document.querySelectorAll('.deck .fa');
-      cardValue[i].classList.add(shuffledCards[i]);
+        var cardValue = document.querySelectorAll('.deck .fa');
+        cardValue[i].classList.add(shuffledCards[i]);
     };
-  };
+};
 
 generateCards(cards);
+
+/*
+var timer = setInterval(function(){
+    time++;
+    console.log(time);
+},1000);
+
+function clearTimer(){
+    clearInterval(timer);
+}
+*/
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -50,55 +64,50 @@ generateCards(cards);
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-function lockcards(){
+function lockcards(evt) {
+    openedcards[0].classList.add('match');
+    openedcards[1].classList.add('match');
 
+    openedcards = [];
 }
 
-function hidecards(evt){
-    openedcards.pop();
-    openedcards.pop();
-    /*
-    targetLists[0].classList.remove("open");
-    targetLists[0].classList.remove("show");
-    targetLists[1].classList.remove("open");
-    targetLists[1].classList.remove("show");
-    */
-
-   evt.target.classList.remove('open');
-   evt.target.classList.remove('show');
-
+function hidecards(evt) {
+    setTimeout(function () {
+        openedcards.forEach(function (card) {
+            card.classList.remove('open', 'show');
+        });
+        openedcards = [];
+    }, 1000);
 }
 
 
-function matchedCheck(evt){
-    /*targetLists.push(evt.target);*/
-    cardValue = evt.target.childNodes[1].className;
-    console.log(cardValue);
-    if(openedcards.length < 2){
-        openedcards.push(cardValue);
-    }
-    if(openedcards.length === 2){
-        console.log("card1:" +openedcards[0]);
-        console.log("card2:" +openedcards[1]);
-        if(openedcards[0] === openedcards[1]){
-            console.log("card matched!");
-        }else{
-            console.log("card not matched!");
+function matchedCheck(evt) {
+
+    console.log("card1:" + openedcards[0].childNodes[1].className);
+    console.log("card2:" + openedcards[1].childNodes[1].className);
+
+    if (openedcards[0].childNodes[1].className === openedcards[1].childNodes[1].className) {
+        console.log("card matched!");
+        lockcards(evt);
+    } else {
+        console.log("card not matched!");
+        openedcards.forEach(function () {
             hidecards(evt);
-        }
+        });
     }
 }
 
-function displaySymbol(evt){
-    /*console.log(evt.target.localName);*/
-    if(evt.target.localName === 'li'){
-        /*console.log('clicked');*/
-        evt.target.classList.add('open');
-        evt.target.classList.add('show');
-        /*cardValue = document.querySelector('.card.open i').className;*/
-        evt.target.removeEventListener('click', displaySymbol);
-        /*document.querySelector('.deck').removeEventListener('click', displaySymbol);*/
-        matchedCheck(evt);
+
+function displaySymbol(evt) {
+    if (evt.target.localName === 'li') {
+        if (!evt.target.classList.contains('open') && !evt.target.classList.contains('show')) {
+            openedcards.push(evt.target);
+            evt.target.classList.add('open', 'show');
+            evt.target.removeEventListener('click', displaySymbol);
+            if (openedcards.length == 2) {
+                matchedCheck(evt);
+            }
+        }
     }
 }
 
