@@ -13,8 +13,11 @@ var moves = 0;
 var num_cards = 0;
 var stars = document.querySelectorAll('.stars i');
 var num_stars = 0;
+var start;
+var timer = 0;
 
-var start = new Date();
+
+var restartbtn = document.querySelector('.restart');
 
 /*
  * Display the cards on the page
@@ -40,8 +43,9 @@ function shuffle(array) {
 
 function generateCards(cardList) {
 
-
-    moveCounter.innerText = moves;
+    start = new Date();
+    
+    
     let shuffledCards = shuffle(cardList);
     num_cards = shuffledCards.length;
     for (i = 0; i < shuffledCards.length; i++) {
@@ -63,7 +67,7 @@ function countupTimer() {
     if(min < 10){min = '0' + min};
     if(sec < 10){sec = '0' + sec};
 
-    var timer = min + ':' + sec;
+    timer = min + ':' + sec;
     /*console.log(timer);*/
     
     document.querySelector('#timer').innerHTML=timer;
@@ -72,6 +76,7 @@ function countupTimer() {
     setTimeout(countupTimer,1000);
 }
 
+restartbtn.addEventListener('click', restart);
 
 
 /*
@@ -97,7 +102,11 @@ function lockcards(evt) {
 
 function gameOver() {
     console.log('game is over');
-    document.getElementById('overlay').style.display = "block";
+    modalcontent = document.getElementById('modal-content');
+    modalcontent.style.display = "block";
+    modalcontent.getElementsByClassName('winscore')[0].innerText=num_stars;
+    modalcontent.getElementsByClassName('timespent')[0].innerText=timer;
+    document.getElementById('modal-overlay').style.display = "block";
 }
 
 
@@ -106,13 +115,34 @@ button.addEventListener('click', restart);
 
 function restart() {
     console.log('game restart');
-    document.getElementById('overlay').style.display = "none";
+
+    stars.forEach(function(star){
+        if(star.classList.contains('fa-star-o')){
+            star.classList.remove('fa-star-o');
+            star.classList.add('fa-star');
+        }
+    });
+
+    num_stars = 3;
+    timer =0;
+    moves = 0;
+    document.querySelector('#timer').innerHTML='00:00';
+    moveCounter.innerText = moves;
+
+    document.getElementById('modal-content').style.display = "none";
+    document.getElementById('modal-overlay').style.display = "none";
     setTimeout(function () {
         existing_cards = document.querySelectorAll('.deck li');
         existing_cards.forEach(function (card) {
             card.classList.remove('open', 'show', 'match');
         });
-        moves = 0;
+        existing_fonts = document.querySelectorAll('.deck i');
+        existing_fonts.forEach(function(font){
+            fontclass= font.classList[1];
+            font.classList.remove(fontclass);
+            font.classList.add('fa');
+        })
+
         generateCards(cards);
     }, 1000);
 }
