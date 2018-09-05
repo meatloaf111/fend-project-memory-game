@@ -7,11 +7,11 @@
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+To get started, clone the repositry and open **index.html** in your browser.
 
-To get started, open `js/app.js` and start building out the app's functionality
+`git clone https://github.com/meatloaf111/fend-project-memory-game.git`
+`cd fend-project-memory-game`
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
 
 ## Contributing
 

@@ -6,6 +6,10 @@ var cards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o",
     "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf",
     "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
 
+/*
+ * Initialize Variables
+ */
+
 var openedcards = [];
 var targetLists = [];
 var moveCounter = document.querySelector('.moves');
@@ -41,11 +45,15 @@ function shuffle(array) {
     return array;
 }
 
+/*
+ * generate Cards for players to play from the beggining
+ */
+
 function generateCards(cardList) {
 
     start = new Date();
-    
-    
+
+
     let shuffledCards = shuffle(cardList);
     num_cards = shuffledCards.length;
     for (i = 0; i < shuffledCards.length; i++) {
@@ -57,6 +65,10 @@ function generateCards(cardList) {
 
 generateCards(cards);
 
+/*
+ * Timer Function
+ */
+
 function countupTimer() {
     now = new Date();
 
@@ -64,18 +76,19 @@ function countupTimer() {
     min = parseInt((datet / 60) % 60);
     sec = datet % 60;
 
-    if(min < 10){min = '0' + min};
-    if(sec < 10){sec = '0' + sec};
+    if (min < 10) { min = '0' + min };
+    if (sec < 10) { sec = '0' + sec };
 
     timer = min + ':' + sec;
     /*console.log(timer);*/
-    
-    document.querySelector('#timer').innerHTML=timer;
-    
 
-    setTimeout(countupTimer,1000);
+    document.querySelector('#timer').innerHTML = timer;
+
+
+    setTimeout(countupTimer, 1000);
 }
 
+/*When restar btn is clicked, call restart function */
 restartbtn.addEventListener('click', restart);
 
 
@@ -104,8 +117,8 @@ function gameOver() {
     console.log('game is over');
     modalcontent = document.getElementById('modal-content');
     modalcontent.style.display = "block";
-    modalcontent.getElementsByClassName('winscore')[0].innerText=num_stars;
-    modalcontent.getElementsByClassName('timespent')[0].innerText=timer;
+    modalcontent.getElementsByClassName('winscore')[0].innerText = num_stars;
+    modalcontent.getElementsByClassName('timespent')[0].innerText = timer;
     document.getElementById('modal-overlay').style.display = "block";
 }
 
@@ -116,17 +129,17 @@ button.addEventListener('click', restart);
 function restart() {
     console.log('game restart');
 
-    stars.forEach(function(star){
-        if(star.classList.contains('fa-star-o')){
+    stars.forEach(function (star) {
+        if (star.classList.contains('fa-star-o')) {
             star.classList.remove('fa-star-o');
             star.classList.add('fa-star');
         }
     });
 
     num_stars = 3;
-    timer =0;
+    timer = 0;
     moves = 0;
-    document.querySelector('#timer').innerHTML='00:00';
+    document.querySelector('#timer').innerHTML = '00:00';
     moveCounter.innerText = moves;
 
     document.getElementById('modal-content').style.display = "none";
@@ -137,8 +150,8 @@ function restart() {
             card.classList.remove('open', 'show', 'match');
         });
         existing_fonts = document.querySelectorAll('.deck i');
-        existing_fonts.forEach(function(font){
-            fontclass= font.classList[1];
+        existing_fonts.forEach(function (font) {
+            fontclass = font.classList[1];
             font.classList.remove(fontclass);
             font.classList.add('fa');
         })
