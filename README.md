@@ -9,7 +9,6 @@ You can enjoy the game by downloading these source codes.
 * [Installation](#installation)
 * [Instructions](#instructions)
 * [MoreInfo](#moreinfo)
-* [Contributing](#contributing)
 
 ## Installation
 
@@ -34,10 +33,7 @@ The game ends once all cards have been correctly matched.
 ## More Info
 
 Udacity Nanodegree
+
 https://sa.udacity.com/course/front-end-web-developer-nanodegree--nd001
 
-## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
