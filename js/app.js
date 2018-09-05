@@ -1,3 +1,4 @@
+
 /*
  * Create a list that holds all of your cards
  */
@@ -12,6 +13,8 @@ var moves = 0;
 var num_cards = 0;
 var stars = document.querySelectorAll('.stars i');
 var num_stars = 0;
+
+var start = new Date();
 
 /*
  * Display the cards on the page
@@ -45,9 +48,30 @@ function generateCards(cardList) {
         var cardValue = document.querySelectorAll('.deck .fa');
         cardValue[i].classList.add(shuffledCards[i]);
     };
+    countupTimer();
 };
 
 generateCards(cards);
+
+function countupTimer() {
+    now = new Date();
+
+    datet = parseInt((now.getTime() - start.getTime()) / 1000);
+    min = parseInt((datet / 60) % 60);
+    sec = datet % 60;
+
+    if(min < 10){min = '0' + min};
+    if(sec < 10){sec = '0' + sec};
+
+    var timer = min + ':' + sec;
+    /*console.log(timer);*/
+    
+    document.querySelector('#timer').innerHTML=timer;
+    
+
+    setTimeout(countupTimer,1000);
+}
+
 
 
 /*
@@ -103,17 +127,17 @@ function hidecards(evt) {
     }, 1000);
 }
 
-function decideStars(count){
-    if(count <= 10){
+function decideStars(count) {
+    if (count <= 10) {
         num_stars = 3;
-    }else if(count >10 && count <= 15){
+    } else if (count > 10 && count <= 15) {
         num_stars = 2;
-        stars[0].classList.remove('fa','fa-star');
-        stars[0].classList.add('fa','fa-star-o');
-    }else if(count >15) {
+        stars[0].classList.remove('fa', 'fa-star');
+        stars[0].classList.add('fa', 'fa-star-o');
+    } else if (count > 15) {
         num_stars = 1;
-        stars[1].classList.remove('fa','fa-star');
-        stars[1].classList.add('fa','fa-star-o');
+        stars[1].classList.remove('fa', 'fa-star');
+        stars[1].classList.add('fa', 'fa-star-o');
     }
 }
 
