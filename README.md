@@ -10,6 +10,7 @@
 To get started, clone the repositry and open **index.html** in your browser.
 
 `git clone https://github.com/meatloaf111/fend-project-memory-game.git`
+
 `cd fend-project-memory-game`
 
 
