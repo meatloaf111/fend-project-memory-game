@@ -8,6 +8,7 @@ You can enjoy the game by downloading these source codes.
 
 * [Installation](#installation)
 * [Instructions](#instructions)
+* [MoreInfo](#moreinfo)
 * [Contributing](#contributing)
 
 ## Installation
@@ -29,6 +30,11 @@ The player then turns over a second card, trying to find the corresponding card 
 If the cards match, both cards stay flipped over.
 If the cards do not match, both cards are flipped face down.
 The game ends once all cards have been correctly matched.
+
+## More Info
+
+Udacity Nanodegree
+https://sa.udacity.com/course/front-end-web-developer-nanodegree--nd001
 
 ## Contributing
 
