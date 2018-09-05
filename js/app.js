@@ -10,6 +10,8 @@ var targetLists = [];
 var moveCounter = document.querySelector('.moves');
 var moves = 0;
 var num_cards = 0;
+var stars = document.querySelectorAll('.stars i');
+var num_stars = 0;
 
 /*
  * Display the cards on the page
@@ -101,6 +103,19 @@ function hidecards(evt) {
     }, 1000);
 }
 
+function decideStars(count){
+    if(count <= 10){
+        num_stars = 3;
+    }else if(count >10 && count <= 15){
+        num_stars = 2;
+        stars[0].classList.remove('fa','fa-star');
+        stars[0].classList.add('fa','fa-star-o');
+    }else if(count >15) {
+        num_stars = 1;
+        stars[1].classList.remove('fa','fa-star');
+        stars[1].classList.add('fa','fa-star-o');
+    }
+}
 
 function matchedCheck(evt) {
 
@@ -120,6 +135,7 @@ function matchedCheck(evt) {
     }
     moves += 1;
     moveCounter.innerText = moves;
+    decideStars(moves);
 }
 
 
