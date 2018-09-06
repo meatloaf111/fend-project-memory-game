@@ -13,7 +13,7 @@ You can enjoy the game by downloading these source codes.
 
 ## Dependencies
 
-fontawsome
+fontawesome
 
 https://fontawesome.bootstrapcheatsheets.com/
 
