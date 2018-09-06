@@ -1,4 +1,4 @@
-
+'use strict';
 /*
  * Create a list that holds all of your cards
  */
@@ -11,7 +11,6 @@ let cards = ['fa-diamond', 'fa-diamond', 'fa-paper-plane-o', 'fa-paper-plane-o',
  */
 
 let openedcards = [];
-let targetLists = [];
 let moveCounter = document.querySelector('.moves');
 let moves = 0;
 let num_cards = 0;
@@ -19,6 +18,13 @@ let stars = document.querySelectorAll('.stars i');
 let num_stars = 0;
 let start;
 let timer = 0;
+let now;
+let datet;
+let min;
+let sec;
+let button;
+let modalcontent;
+let existing_cards;
 
 
 let restartbtn = document.querySelector('.restart');
@@ -59,12 +65,13 @@ function generateCards(cardList) {
 
     let shuffledCards = shuffle(cardList);
     num_cards = shuffledCards.length;
+    let i;
     for (i = 0; i < shuffledCards.length; i++) {
         var cardValue = document.querySelectorAll('.deck .fa');
         cardValue[i].classList.add(shuffledCards[i]);
-    };
+    }
     countupTimer();
-};
+}
 
 generateCards(cards);
 
@@ -132,7 +139,7 @@ function lockcards(evt) {
 
 
 function gameOver() {
-    console.log('game is over');
+    /*console.log('game is over');*/
     modalcontent = document.getElementById('modal-content');
     modalcontent.style.display = 'block';
     modalcontent.getElementsByClassName('winscore')[0].innerText = num_stars;
@@ -151,7 +158,7 @@ button.addEventListener('click', restart);
 
 
 function restart() {
-    console.log('game restart');
+    /*Console.log('game restart');*/
 
     stars.forEach(function (star) {
         if (star.classList.contains('fa-star-o')) {
@@ -173,6 +180,8 @@ function restart() {
         existing_cards.forEach(function (card) {
             card.classList.remove('open', 'show', 'match');
         });
+        let existing_fonts;
+        let fontclass;
         existing_fonts = document.querySelectorAll('.deck i');
         existing_fonts.forEach(function (font) {
             fontclass = font.classList[1];
@@ -190,7 +199,7 @@ function restart() {
 * @param event - event
 */
 
-function hidecards(evt) {
+function hidecards() {
     setTimeout(function () {
         openedcards.forEach(function (card) {
             card.classList.remove('open', 'show');
@@ -231,10 +240,10 @@ function matchedCheck(evt) {
     */
 
     if (openedcards[0].childNodes[1].className === openedcards[1].childNodes[1].className) {
-        console.log('card matched!');
+        /*console.log('card matched!');*/
         lockcards(evt);
     } else {
-        console.log('card not matched!');
+        /*console.log('card not matched!');*/
         openedcards.forEach(function () {
             hidecards(evt);
         });
