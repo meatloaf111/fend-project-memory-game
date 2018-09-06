@@ -6,9 +6,21 @@ You can enjoy the game by downloading these source codes.
 
 ## Table of Contents
 
+* [Dependencies](#dependencies)
 * [Installation](#installation)
 * [Instructions](#instructions)
 * [MoreInfo](#moreinfo)
+
+## Dependencies
+
+fontawsome
+
+https://fontawesome.bootstrapcheatsheets.com/
+
+Google Coda Fonts
+
+https://fonts.google.com/specimen/Coda
+
 
 ## Installation
 
